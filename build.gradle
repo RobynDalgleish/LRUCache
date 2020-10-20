@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        lombokVersion = '1.18.12'
+
+        assertJVersion = '3.14.0'
+        mockitoJunitVersion = '3.5.10'
+        jupiterVersion = '5.1.0'
+    }
+}
+
+plugins {
+    id 'java'
+    id "idea"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://jcenter.bintray.com" }
+}
+
+dependencies {
+
+    annotationProcessor(
+            "org.projectlombok:lombok:${lombokVersion}"
+    )
+
+    compileOnly(
+            "org.projectlombok:lombok:${lombokVersion}"
+    )
+
+    testAnnotationProcessor(
+            "org.projectlombok:lombok:${lombokVersion}"
+    )
+
+    testCompileOnly (
+            group: 'junit', name: 'junit', version: '4.12'
+    )
+
+    testImplementation(
+            "org.assertj:assertj-core:${assertJVersion}",
+            "org.junit.jupiter:junit-jupiter-params:${jupiterVersion}"
+    )
+
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+    )
+}
